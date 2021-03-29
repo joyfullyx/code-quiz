@@ -1,3 +1,92 @@
 * {
     background: salmon;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+h1 {
+    font-size: 40px;
+    text-align: center;
+}
+
+main {
+    display: block;
+}
+
+button {
+    cursor: pointer;
+}
+
+.timer {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.start {
+    font-weight: bold;
+    width: 100px;
+    height: 45px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    
+}
+
+#question {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.option-buttons {
+    display: block;
+}
+
+.option-buttons button {
+    font-size: 24px;
+}
+
+#first {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    visibility: visible;
+}
+
+#second {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    visibility: visible;
+}
+
+
+#third {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    visibility: visible;
+}
+
+#input {
+    visibility: hidden;
+}
+
+#fourth {
+    margin-top: 15px;
+    margin: 10px 0px;
+    visibility: visible;
+}
+
+.answerButton p {
+    visibility: hidden;
+}
+
+.answer-result {
+    font-size: 20px;
+    border-top: 1px solid black;
+    padding-top: 10px;
+}
+
+.stats {
+    font-size: 18px;
+    border-top: 1px solid black;
+    padding-top: 10px;
 }

@@ -8,9 +8,76 @@
     <title>Code Quiz</title>
 </head>
 <body>
-    <h1>Quizzzzzzzerrrrrrr</h1>
+    <header>
+        <h1>Quiz!</h1>
+    </header>
 
+    <main class="quiz">
+        <section>
+            <p class="timer"></p>
+        </section>
 
-    <script href="./assets/script.js"></script>
+        <section>
+            <button id="startButton" class="start">Start!</button>    
+        </section>
+
+        <section class="quiz-body">
+            <p id="question">Question goes here</p>
+            <p id="finished-messaage"></p>
+
+            <div class="option-buttons">
+                <div>
+                    <button class="answerButton" id="first">first choice</button>
+                    <p class="score"></p>
+                </div>
+                <div>
+                    <button class="answerButton" id="second">second choice</button>
+                    <form id="input">
+                        <label for="initials">Enter initials: </label>
+                        <input type="text">
+                    </form>      
+                </div>
+                <div>
+                    <button class="answerButton" id="third">third choice</button>
+                </div>
+                <div>
+                    <button class="answerButton" id="fourth">Fourth choice</button>
+                </div>
+            </div>
+        </section>
+
+        <section>
+                <p class="answer-result">right/wrong</p>
+        </section>
+
+        <!-- <section class="epilogue">
+            <div>
+                <p id="complete">You made it! Let's see how you did!</p>
+            </div>
+
+            <div>
+                <p id="score">Score: </p>
+            </div>
+
+            <div>
+                <form id="input">
+                    <label for="initials">Enter initials: </label>
+                    <input type="text">
+                </form>
+            </div>
+
+            </form>
+        </section> -->
+
+        <section>
+            <p class="stats">Highscores</p>
+        </section>
+
+        <script src="./assets/script.js"></script>
+    </main>
+
+    
+
+    
 </body>
 </html>
