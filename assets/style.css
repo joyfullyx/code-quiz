@@ -1,5 +1,5 @@
 * {
-    background: salmon;
+    background: white;
     font-family: sans-serif;
     text-align: center;
 }
@@ -15,6 +15,15 @@ main {
 
 button {
     cursor: pointer;
+    border-radius: 5px;
+}
+
+form {
+    border-radius: 5px;
+}
+
+.highscore-tracker {
+    visibility: hidden;
 }
 
 .timer {
@@ -67,6 +76,7 @@ button {
 
 #input {
     visibility: hidden;
+    font-size: 28px;
 }
 
 #fourth {
@@ -89,4 +99,12 @@ button {
     font-size: 18px;
     border-top: 1px solid black;
     padding-top: 10px;
+}
+
+#stats {
+    font-size: 21px;
+}
+
+form {
+    visibility: hidden;
 }

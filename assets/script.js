@@ -8,11 +8,15 @@ var answer1 = document.querySelector('#first');
 var answer2 = document.querySelector('#second');
 var answer3 = document.querySelector('#third');
 var answer4 = document.querySelector('#fourth');
+var answerResult = document.querySelector('.answer-result');
 var finishedPage = document.querySelector('.epilogue');
 var scoreDisplay = document.querySelector('.score');
 var initialInput = document.querySelector('#input');
 var rightWrong = document.querySelector('.answer-result');
-
+var highScores = document.querySelector('#highscores');
+var checkStats = document.querySelector('#stats');
+var submitButton = document.querySelector('#submit');
+var quizBody = document.querySelector('.quiz-body');
 
 var questionsAndAnswers = [
     {
@@ -63,30 +67,27 @@ var questionsAndAnswers = [
 var lastQuestion = questionsAndAnswers.length - 1;
 var currentQuestion = 0; 
 
-var score = [];
-var initials = "";
-var startTime = 120;
-var keepPlaying = true;
-var clickStart = true;
+var score = 0;
+var highScore = 0;
+var startTime = 60;
 
 
 // Timer function 
 function startTimer() { 
+    startButton.style.visibility = 'hidden';
+
     var secondsLeft = setInterval(function() {
-        if(startTime > 1) {
-             // displays timer
-            timer.textContent = startTime + " seconds left!"
-            startTime--;
-        } else {
-            // message when timer runs out 
+        timer.textContent = startTime + " seconds left!"
+        startTime--;
+
+        if(startTime <= 0 || questionsAndAnswers.length < currentQuestion) {
             timer.textContent = "Game Over!"
             clearInterval(setInterval);
+            results();
         }
     }, 1000);
-    
 }
 
-// function to start quiz
 function renderQuestions() {
     // for each question rendered
     var quizQuestion = questionsAndAnswers[currentQuestion];
@@ -96,26 +97,21 @@ function renderQuestions() {
     answer2.innerHTML = quizQuestion.answers.answer2;
     answer3.innerHTML = quizQuestion.answers.answer3;
     answer4.innerHTML = quizQuestion.answers.answer4;
-
-
 }
 
 renderQuestions();
 
-function results() {
-    questions.textContent = "You made it! Let's see how you did!";
-    scoreDisplay.textContent = "score: " + score;
-    initialInput.style.visibility = 'visible';
 
-    answer1.style.visibility = 'hidden';
-    answer2.style.visibility = 'hidden';
-    answer3.style.visibility = 'hidden';
-    answer4.style.visiblity = 'hidden';
+
+function highScores () {
+
+}
+
+function submitButton () {
 
 }
 
 
-document.getElementById("startButton").addEventListener("click", startTimer);
 
 var answerButtons = document.querySelectorAll(".answerButton")
 for (i = 0; i < answerButtons.length; i++) {
@@ -123,21 +119,98 @@ for (i = 0; i < answerButtons.length; i++) {
     button.addEventListener("click", function(event) {
         if (event.target !== questionsAndAnswers[currentQuestion].correctAnswer) {
             startTime -= 15;
-            console.log('wrong answer');
-        };
+            console.log('wrong answer', score);
+            rightWrong.textContent = "Wrong!";
+        } else {
+            rightWrong.textContent = "Correct!"
+            score++
+            console.log('right answer', score);
+        }
 
         // Go to next set of questions
         currentQuestion += 1;
         
-
+        // go through questions array, end game and go to results/stats when done
         if (currentQuestion < questionsAndAnswers.length) {
-
             renderQuestions();
         } else {
             results();
         }
     })
+
 }
+
+
+
+function results() {
+
+    
+    questions.textContent = "Scores!";
+    scoreDisplay.textContent = "score: " + score;
+    initialInput.style.visibility = 'visible';
+    submitButton.style.visibility = 'visible';
+
+    scoreDisplay.setAttribute('style', 'font-size: 28px');
+
+    answer1.style.visibility = 'hidden';
+    answer2.style.visibility = 'hidden';
+    answer3.style.visibility = 'hidden';
+    answer4.style.visibility = 'hidden';   
+    answerResult.style.visibility = 'hidden';
+
+}
+
+
+document.getElementById("startButton").addEventListener("click", startTimer);
+
+checkStats.addEventListener('click', function(event) {
+    checkStats.style.cursor = 'pointer';
+    return results();
+})
+
+submitButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    results();
+    // console.log(initialInput.value)
+    if (initialInput.value) {
+        var scoreHistory = JSON.parse(window.localStorage.getItem('stats')) || []
+
+        var stats = {
+            initials: initialInput.value,
+            score
+        }
+
+        scoreHistory.push(stats);
+
+        window.localStorage.setItem('stats', JSON.stringify(scoreHistory))
+        initialInput.value = '';
+
+       
+        
+
+    } else {
+        return;
+    }
+    
+    }
+)
+
+
+
+
+
+
+
+
+
+
+// TODO:
+// push score and initials to empty array
+// put in local storage
+// stop timer when all questions are answered and go to results()
+
+
+
 
 
 // start timer when start button is pressed
@@ -158,3 +231,12 @@ for (i = 0; i < answerButtons.length; i++) {
     // show final score
     // form to submit initials
     // local storage for score and initials to track high scores
+
+    // retrieve data, turn into array, push your value in, store so its in correct order, then put it in local storage
+        // create array of objects
+        // .sort method 
+
+        // submitScore.addEventListener("submit", function(event)) {
+        //     event.preventDefault();
+        // }
+
