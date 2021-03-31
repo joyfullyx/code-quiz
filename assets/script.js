@@ -85,7 +85,7 @@ function startTimer() {
             startButton.style.visibility = 'visible';
             startGame();
             clearInterval(setInterval);
-            results();
+            // results();
         }
     }, 1000);
     startGame();
@@ -152,41 +152,61 @@ document.getElementById("startButton").addEventListener("click", startTimer);
 
 checkStats.addEventListener('click', function(event) {
     checkStats.style.cursor = 'pointer';
-    return results();
+    // return results();
 })
+
+// submitButton.addEventListener('click', function(event) {
+//     event.preventDefault();
+//     // console.log(initialInput.value)
+//     // console.log(score)
+//     if (initialInput.value) {
+//         // results();
+
+//         var scoreHistory = JSON.parse(window.localStorage.getItem('stats')) || [];
+//         var stats = {
+//             initials: initialInput.value,
+//             score: score
+//         }
+
+//         scoreHistory.push(stats);
+//         window.localStorage.setItem('stats', JSON.stringify(scoreHistory));
+//         initialInput.value = '';
+//         results();
+//         scoreTracker.textcontent = scoreHistory
+        
+//     } else {
+//         return;
+//     }   
+// });
+
+function saveLastScore () {
+    var stats = [
+        {
+        initials: initialInput.value,
+        score: score
+    }];
+    console.log(initialInput.value, score);
+    
+    localStorage.setItem('stats', JSON.stringify(stats));
+}
+
+function renderLastScore () {
+    var scoreHistory = JSON.parse(localStorage.getItem('stats'));
+    scoreHistory.push(stats);
+    if (scoreHistory !== null) {
+        answer1.textContent = stats.initials;
+        answer2.textContent = stats.score;
+    } else {
+        return;
+    }
+}
 
 submitButton.addEventListener('click', function(event) {
     event.preventDefault();
-    
-    // console.log(initialInput.value)
-    // console.log(score)
-    if (initialInput.value) {
-        // results();
-        var scoreHistory = JSON.parse(window.localStorage.getItem('stats')) || [];
-        var stats = {
-            initials: initialInput.value,
-            score: score
-        }
-
-        scoreHistory.push(stats);
-        window.localStorage.setItem('stats', JSON.stringify(scoreHistory))
-        initialInput.value = '';
-        results();
-        scoreTracker.textcontent = scoreHistory
-        
-
-    } else {
-        return;
-    }   
-}
-)
-
-
-
-
-
-
-
+    saveLastScore();
+    renderLastScore();
+    startGame();
+});
 
 
 // start timer when start button is pressed

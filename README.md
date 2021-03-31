@@ -1,4 +1,4 @@
-# code-quiz
+# Multiple Choice Quiz
 
 ## Objective
 
@@ -8,10 +8,10 @@ A wrong aswer will deduct 15 seconds from the timer, and the quiz is over when a
 
 When the quiz is over the score is displayed, as well as a form to submit initials to log your score to local storage, which can be displayed and tracked for all previous rounds. 
 
-[title](www.example.com)
+[Golf Speed Quiz](https://joyfullyx.github.io/code-quiz/)
 
-![start screen](image.jpg)
+![start screen](https://raw.githubusercontent.com/joyfullyx/code-quiz/main/images/start-screen.png)
 
-![timer](image.jpg)
+![timer](https://raw.githubusercontent.com/joyfullyx/code-quiz/main/images/timer.png)
 
-![results screen](image.jpg)
+![results screen](https://raw.githubusercontent.com/joyfullyx/code-quiz/main/images/final-screen.png)
