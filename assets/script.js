@@ -19,6 +19,7 @@ var submitButton = document.querySelector('#submit');
 var quizBody = document.querySelector('.quiz-body');
 var scoreTracker = document.querySelector('#finished-message');
 
+// array of objects for questions, answers, correct answer
 var questionsAndAnswers = [
     {
         question: 'What is a par?',
@@ -72,7 +73,7 @@ var score = 0;
 var highScore = 0;
 var startTime = 30;
 
-// Timer function 
+// countdown timer function 
 function startTimer() { 
     startButton.style.visibility = 'hidden';
 
@@ -91,6 +92,7 @@ function startTimer() {
     startGame();
 }
 
+
 function renderQuestions() {
     // Display for each question rendered
     var quizQuestion = questionsAndAnswers[currentQuestion];
@@ -105,6 +107,7 @@ function renderQuestions() {
 renderQuestions();
 
 function startGame () {
+    // loop through questions/asnwers array on click of answer option 
 var answerButtons = document.querySelectorAll(".answerButton")
 for (i = 0; i < answerButtons.length; i++) {
     button = answerButtons[i];
@@ -155,30 +158,8 @@ checkStats.addEventListener('click', function(event) {
     // return results();
 })
 
-// submitButton.addEventListener('click', function(event) {
-//     event.preventDefault();
-//     // console.log(initialInput.value)
-//     // console.log(score)
-//     if (initialInput.value) {
-//         // results();
 
-//         var scoreHistory = JSON.parse(window.localStorage.getItem('stats')) || [];
-//         var stats = {
-//             initials: initialInput.value,
-//             score: score
-//         }
-
-//         scoreHistory.push(stats);
-//         window.localStorage.setItem('stats', JSON.stringify(scoreHistory));
-//         initialInput.value = '';
-//         results();
-//         scoreTracker.textcontent = scoreHistory
-        
-//     } else {
-//         return;
-//     }   
-// });
-
+// local storage 
 function saveLastScore () {
     var stats = [
         {
@@ -186,7 +167,7 @@ function saveLastScore () {
         score: score
     }];
     console.log(initialInput.value, score);
-    
+
     localStorage.setItem('stats', JSON.stringify(stats));
 }
 
@@ -207,32 +188,3 @@ submitButton.addEventListener('click', function(event) {
     renderLastScore();
     startGame();
 });
-
-
-// start timer when start button is pressed
-    // -15 seconds when answer is wrong
-    // game is over if you run out of time
-    // if out of time before answering all questions, go to stats page
-
-// display questions and answers
-    // randomize answer choices
-    // track if answer was right or wrong
-    // go to next question when answered
-    // push results into empty array
-
-// repeat for all 4 questions 
-
-// go to stats page
-// create variable for stats and initials to go to local storage
-    // show final score
-    // form to submit initials
-    // local storage for score and initials to track high scores
-
-    // retrieve data, turn into array, push your value in, store so its in correct order, then put it in local storage
-        // create array of objects
-        // .sort method 
-
-        // submitScore.addEventListener("submit", function(event)) {
-        //     event.preventDefault();
-        // }
-

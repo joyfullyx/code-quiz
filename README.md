@@ -15,3 +15,5 @@ When the quiz is over the score is displayed, as well as a form to submit initia
 ![timer](https://raw.githubusercontent.com/joyfullyx/code-quiz/main/images/timer.png)
 
 ![results screen](https://raw.githubusercontent.com/joyfullyx/code-quiz/main/images/final-screen.png)
+
+![console/local-storage](https://raw.githubusercontent.com/joyfullyx/code-quiz/main/images/console.png)
