@@ -17,6 +17,7 @@ var highScores = document.querySelector('#highscores');
 var checkStats = document.querySelector('#stats');
 var submitButton = document.querySelector('#submit');
 var quizBody = document.querySelector('.quiz-body');
+var scoreTracker = document.querySelector('#finished-message');
 
 var questionsAndAnswers = [
     {
@@ -69,8 +70,7 @@ var currentQuestion = 0;
 
 var score = 0;
 var highScore = 0;
-var startTime = 60;
-
+var startTime = 30;
 
 // Timer function 
 function startTimer() { 
@@ -80,16 +80,19 @@ function startTimer() {
         timer.textContent = startTime + " seconds left!"
         startTime--;
 
-        if(startTime <= 0 || questionsAndAnswers.length < currentQuestion) {
+        if(startTime <= 0 || questionsAndAnswers.length <= currentQuestion) {
             timer.textContent = "Game Over!"
+            startButton.style.visibility = 'visible';
+            startGame();
             clearInterval(setInterval);
             results();
         }
     }, 1000);
+    startGame();
 }
 
 function renderQuestions() {
-    // for each question rendered
+    // Display for each question rendered
     var quizQuestion = questionsAndAnswers[currentQuestion];
 
     questions.innerHTML = quizQuestion.question;
@@ -101,35 +104,24 @@ function renderQuestions() {
 
 renderQuestions();
 
-
-
-function highScores () {
-
-}
-
-function submitButton () {
-
-}
-
-
-
+function startGame () {
 var answerButtons = document.querySelectorAll(".answerButton")
 for (i = 0; i < answerButtons.length; i++) {
     button = answerButtons[i];
     button.addEventListener("click", function(event) {
         if (event.target !== questionsAndAnswers[currentQuestion].correctAnswer) {
+            // deduct 15sec from timer if answer = wrong
             startTime -= 15;
             console.log('wrong answer', score);
             rightWrong.textContent = "Wrong!";
         } else {
             rightWrong.textContent = "Correct!"
+            // add score to keep count if right
             score++
             console.log('right answer', score);
         }
-
         // Go to next set of questions
-        currentQuestion += 1;
-        
+        currentQuestion += 1;        
         // go through questions array, end game and go to results/stats when done
         if (currentQuestion < questionsAndAnswers.length) {
             renderQuestions();
@@ -137,18 +129,15 @@ for (i = 0; i < answerButtons.length; i++) {
             results();
         }
     })
+}}
 
-}
-
-
-
-function results() {
-
-    
+// Display for results
+function results() {  
     questions.textContent = "Scores!";
     scoreDisplay.textContent = "score: " + score;
     initialInput.style.visibility = 'visible';
     submitButton.style.visibility = 'visible';
+    startButton.style.visibility = 'visible';
 
     scoreDisplay.setAttribute('style', 'font-size: 28px');
 
@@ -157,9 +146,7 @@ function results() {
     answer3.style.visibility = 'hidden';
     answer4.style.visibility = 'hidden';   
     answerResult.style.visibility = 'hidden';
-
 }
-
 
 document.getElementById("startButton").addEventListener("click", startTimer);
 
@@ -170,44 +157,33 @@ checkStats.addEventListener('click', function(event) {
 
 submitButton.addEventListener('click', function(event) {
     event.preventDefault();
-    results();
+    
     // console.log(initialInput.value)
+    // console.log(score)
     if (initialInput.value) {
-        var scoreHistory = JSON.parse(window.localStorage.getItem('stats')) || []
-
+        // results();
+        var scoreHistory = JSON.parse(window.localStorage.getItem('stats')) || [];
         var stats = {
             initials: initialInput.value,
-            score
+            score: score
         }
 
         scoreHistory.push(stats);
-
         window.localStorage.setItem('stats', JSON.stringify(scoreHistory))
         initialInput.value = '';
-
-       
+        results();
+        scoreTracker.textcontent = scoreHistory
         
 
     } else {
         return;
-    }
-    
-    }
+    }   
+}
 )
 
 
 
 
-
-
-
-
-
-
-// TODO:
-// push score and initials to empty array
-// put in local storage
-// stop timer when all questions are answered and go to results()
 
 
 
